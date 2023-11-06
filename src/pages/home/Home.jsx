@@ -58,6 +58,9 @@ export default function Home() {
             </>
           )}
 
+          <Grid xs={12} sx={{ m: 5 }}>
+            <h3>Static Properties</h3>
+          </Grid>
           {images.map((card, index) => (
             <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
               <ReservationCardCopy
