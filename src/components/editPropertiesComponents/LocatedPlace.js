@@ -4,6 +4,7 @@ import SearchBar from "../leaftLet/SearchBar";
 import Maps from "../leaftLet/Maps";
 
 const LocatedPlace = ({ setStepValue, values }) => {
+  // const Located = ({ setStepValue, values }) => {
   const [selectPosition, setSelectPosition] = useState(null);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const LocatedPlace = ({ setStepValue, values }) => {
     };
     setSelectPosition(location);
     setStepValue("locatedPlace", data);
+    // setStepValue("located", data);
   };
 
   return (
@@ -78,3 +80,4 @@ const LocatedPlace = ({ setStepValue, values }) => {
 };
 
 export default LocatedPlace;
+// export default Located;

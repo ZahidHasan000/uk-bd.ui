@@ -13,7 +13,9 @@ import { getApi } from "../../config/configAxios";
 import CustomHashLoader from "../customLoader/CustomHashLoader";
 
 const PlaceDescibe = ({ setStepValue, values }) => {
+  // const PlaceDescribesId = ({ setStepValue, values }) => {
   const [activeBox, setActiveBox] = useState(values.placeDescibe || null);
+  // const [activeBox, setActiveBox] = useState(values.placeDescribesId || null);
   const [amenities, setAmenities] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,6 +37,7 @@ const PlaceDescibe = ({ setStepValue, values }) => {
 
   useEffect(() => {
     setStepValue("placeDescibe", activeBox);
+    // setStepValue("placeDescribesId", activeBox);
   }, [activeBox, setStepValue]);
 
   const boxStyles = {
@@ -116,3 +119,4 @@ const PlaceDescibe = ({ setStepValue, values }) => {
 };
 
 export default PlaceDescibe;
+// export default PlaceDescribesId;

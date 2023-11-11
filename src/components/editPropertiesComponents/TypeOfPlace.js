@@ -11,19 +11,22 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import CustomHashLoader from "../customLoader/CustomHashLoader";
- 
+
 const TypeOfPlace = ({ setStepValue, values }) => {
+  // const TypeOfPlaceId = ({ setStepValue, values }) => {
   const [activeBox, setActiveBox] = useState(values.typeOfPlaceId || null);
   const [typeOfPlace, setTypeOfPlace] = useState([]);
+  // const [typeOfPlaceId, setTypeOfPlaceId] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     getApi("/typeOfPlace")
       .then((response) => setTypeOfPlace(response.data.typeOfPlace))
+      // .then((response) => setTypeOfPlaceId(response.data.typeOfPlaceId))
       .catch((error) => console.log("error", error.message))
-      .finally(() => setLoading(false)); 
-      console.log(values.typeOfPlaceId)
+      .finally(() => setLoading(false));
+    console.log(values.typeOfPlaceId)
   }, []);
   const handleBoxClick = (boxId) => {
     setActiveBox(boxId === activeBox ? null : boxId);
@@ -31,6 +34,7 @@ const TypeOfPlace = ({ setStepValue, values }) => {
 
   useEffect(() => {
     setStepValue("typeOfPlace", activeBox);
+    // setStepValue("typeOfPlaceId", activeBox);
   }, [activeBox, setStepValue]);
 
   const boxStyles = {
@@ -63,55 +67,57 @@ const TypeOfPlace = ({ setStepValue, values }) => {
             marginBottom: "130px",
           }}
         >
-        {loading ? (
-          <CustomHashLoader /> 
-        ) : (
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={12} mb={3}>
-              <h1>What type of place will guests have?</h1>
-            </Grid>
-            {typeOfPlace.map((data) => (
-              <Grid item xs={12} key={data._id}>
-                <Card
-                  sx={{
-                    border: "1px solid #999",
-                    ...boxStyles,
-                    ...(activeBox === data._id ||
-                    values.typeOfPlace === data._id
-                      ? activeBoxStyles
-                      : {}),
-                    boxShadow: "none",
-                  }}
-                  onClick={() => handleBoxClick(data._id)}
-                >
-                  <CardActionArea sx={{ padding: "0px", margin: "0px" }}>
-                    <CardContent>
-                      <Box
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                        alignItems={"center"}
-                      >
-                        <Box width={"80%"}>
-                          <Typography
-                            variant="h6"
-                            fontSize={"18px"}
-                            fontWeight={"600"}
-                          >
-                            {data.title}
-                          </Typography>
-                          <Typography variant="h6" fontSize={"16px"}>
-                            {data.subtitle}
-                          </Typography>
-                        </Box>
-                        <Icon icon={data.icon} style={{ fontSize: "40px" }} />
-                      </Box>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+          {loading ? (
+            <CustomHashLoader />
+          ) : (
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={12} mb={3}>
+                <h1>What type of place will guests have?</h1>
               </Grid>
-            ))}
-          </Grid>
-        )}
+              {/* {typeOfPlaceId.map((data) => ( */}
+              {typeOfPlace.map((data) => (
+                <Grid item xs={12} key={data._id}>
+                  <Card
+                    sx={{
+                      border: "1px solid #999",
+                      ...boxStyles,
+                      ...(activeBox === data._id ||
+                        values.typeOfPlace === data._id
+                        // values.typeOfPlaceId === data._id
+                        ? activeBoxStyles
+                        : {}),
+                      boxShadow: "none",
+                    }}
+                    onClick={() => handleBoxClick(data._id)}
+                  >
+                    <CardActionArea sx={{ padding: "0px", margin: "0px" }}>
+                      <CardContent>
+                        <Box
+                          display={"flex"}
+                          justifyContent={"space-between"}
+                          alignItems={"center"}
+                        >
+                          <Box width={"80%"}>
+                            <Typography
+                              variant="h6"
+                              fontSize={"18px"}
+                              fontWeight={"600"}
+                            >
+                              {data.title}
+                            </Typography>
+                            <Typography variant="h6" fontSize={"16px"}>
+                              {data.subtitle}
+                            </Typography>
+                          </Box>
+                          <Icon icon={data.icon} style={{ fontSize: "40px" }} />
+                        </Box>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          )}
         </Box>
       </Container>
     </>
@@ -119,3 +125,4 @@ const TypeOfPlace = ({ setStepValue, values }) => {
 };
 
 export default TypeOfPlace;
+// export default TypeOfPlaceId;

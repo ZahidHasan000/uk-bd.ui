@@ -17,6 +17,7 @@ const Prices = ({ setStepValue, values }) => {
     setStepValue("prices", price);
   }, [price]);
 
+
   const handlePrice = (e) => {
     const value = parseFloat(e.target.value);
     if (!isNaN(value) && value >= 0) {
@@ -24,8 +25,11 @@ const Prices = ({ setStepValue, values }) => {
     }
   };
 
+
+
   // Function to fetch the suggested price from the API
   const fetchSuggestedPrice = () => {
+    console.log(price);
     // Make an HTTP request to your Flask API
     axios
       .post("http://localhost:5001/price", {

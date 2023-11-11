@@ -14,13 +14,17 @@ import CustomHashLoader from "../customLoader/CustomHashLoader";
  
 const TypeOfPlace = ({ setStepValue, values }) => {
   const [activeBox, setActiveBox] = useState(values.typeOfPlace || null);
+// const TypeOfPlaceId = ({ setStepValue, values }) => {
+//   const [activeBox, setActiveBox] = useState(values.typeOfPlaceId || null);
   const [typeOfPlace, setTypeOfPlace] = useState([]);
+  // const [typeOfPlaceId, setypeOfPlaceId] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     getApi("/typeOfPlace")
       .then((response) => setTypeOfPlace(response.data.typeOfPlace))
+      // .then((response) => setypeOfPlaceId(response.data.typeOfPlaceId))
       .catch((error) => console.log("error", error.message))
       .finally(() => setLoading(false));
   }, []);
@@ -30,6 +34,7 @@ const TypeOfPlace = ({ setStepValue, values }) => {
 
   useEffect(() => {
     setStepValue("typeOfPlace", activeBox);
+    // setStepValue("typeOfPlaceId", activeBox);
   }, [activeBox, setStepValue]);
 
   const boxStyles = {
@@ -69,6 +74,7 @@ const TypeOfPlace = ({ setStepValue, values }) => {
             <Grid item xs={12} md={12} mb={3}>
               <h1>What type of place will guests have?</h1>
             </Grid>
+            {/* {typeOfPlaceId.map((data) => ( */}
             {typeOfPlace.map((data) => (
               <Grid item xs={12} key={data._id}>
                 <Card
@@ -77,6 +83,7 @@ const TypeOfPlace = ({ setStepValue, values }) => {
                     ...boxStyles,
                     ...(activeBox === data._id ||
                     values.typeOfPlace === data._id
+                    // values.typeOfPlaceId === data._id
                       ? activeBoxStyles
                       : {}),
                     boxShadow: "none",
@@ -118,3 +125,4 @@ const TypeOfPlace = ({ setStepValue, values }) => {
 };
 
 export default TypeOfPlace;
+// export default TypeOfPlaceId;

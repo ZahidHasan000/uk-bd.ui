@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "../pages/home/Home";
-import Profile from "../pages/profile/Profile";
 import { PageNotFound } from "../pages/404";
 import ReservationDetails from "../pages/reservationDetails/ReservationDetails";
 import AddProperties from "../pages/addProperties";
@@ -11,7 +10,7 @@ import ProtectedRoute from "../helpers/ProtectedRoute";
 import Hosting from "../pages/hosting";
 import PropertyList from "../pages/propertyList";
 import EditProperty from "../pages/editProperty";
-import ReservationDetailsCopy from "../pages/reservationDetails/ReservationDetails copy";
+import ProfilePage from "../pages/profile/ProfilePage";
 
 export const AppRoutes = () => {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedIn);
@@ -45,15 +44,11 @@ export const AppRoutes = () => {
         <Route path="/edit/property/:propertyId" element={<EditProperty />} />
         <Route
           path="/profile"
-          element={<ProtectedRoute children={<Profile />} />}
+          element={<ProtectedRoute children={<ProfilePage />} />}
         />
         <Route
           path="/reservation-details/:propertyId"
           element={<ProtectedRoute children={<ReservationDetails />} />}
-        />
-        <Route
-          path="/reservation-details"
-          element={<ProtectedRoute children={<ReservationDetailsCopy />} />}
         />
         <Route
           path="/payments"

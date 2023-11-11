@@ -3,9 +3,12 @@ import MobileStepper from "@mui/material/MobileStepper";
 import { Button } from "@mui/material";
 import StartProperties from "../../components/addpropertiesComponents/StartProperties";
 import PlaceDescibe from "../../components/addpropertiesComponents/PlaceDescibe";
+// import PlaceDescribesId from "../../components/addpropertiesComponents/PlaceDescibe";
 import AddAdrress from "../../components/addpropertiesComponents/AddAddress";
+// import TypeOfPlaceId from "../../components/addpropertiesComponents/TypeOfPlace";
 import TypeOfPlace from "../../components/addpropertiesComponents/TypeOfPlace";
 import LocatedPlace from "../../components/addpropertiesComponents/LocatedPlace";
+// import Located from "../../components/addpropertiesComponents/LocatedPlace";
 import Guests from "../../components/addpropertiesComponents/Guests";
 import Offer from "../../components/addpropertiesComponents/Offer";
 import Description from "../../components/addpropertiesComponents/Description";
@@ -29,8 +32,11 @@ export default function AddPropertise() {
     JSON.parse(localStorage.getItem(localStorageKey)) || {
       start: "start",
       placeDescibe: null,
+      // placeDescribesId: null,
+      // typeOfPlaceId : null,
       typeOfPlace: null,
       locatedPlace: null,
+      // located: null,
       addAddress: null,
       guests: null,
       offer: null,
@@ -54,8 +60,11 @@ export default function AddPropertise() {
     const data = {
       userId: userId,
       placeDescribesId: stepValues.placeDescibe,
+      // placeDescribesId: stepValues.placeDescribesId,
+      // typeOfPlaceId: stepValues.typeOfPlaceId,
       typeOfPlaceId: stepValues.typeOfPlace,
       located: stepValues.locatedPlace,
+      // located: stepValues.located,
       address: stepValues.addAddress,
       guests: stepValues.guests,
       amenitiesIds: stepValues.offer,
@@ -118,6 +127,15 @@ export default function AddPropertise() {
             values={parsedSavedStepValues}
           />
         );
+
+      // case 1:
+      //   return (
+      //     <PlaceDescribesId
+      //       setStepValue={handleStepChange}
+      //       values={parsedSavedStepValues}
+      //     />
+      //   );
+
       case 2:
         return (
           <TypeOfPlace
@@ -125,6 +143,13 @@ export default function AddPropertise() {
             values={parsedSavedStepValues}
           />
         );
+      // case 2:
+      //   return (
+      //     <TypeOfPlaceId
+      //       setStepValue={handleStepChange}
+      //       values={parsedSavedStepValues}
+      //     />
+      //   );
       case 3:
         return (
           <LocatedPlace
@@ -132,6 +157,13 @@ export default function AddPropertise() {
             values={parsedSavedStepValues}
           />
         );
+      // case 3:
+      //   return (
+      //     <Located
+      //       setStepValue={handleStepChange}
+      //       values={parsedSavedStepValues}
+      //     />
+      //   );
       case 4:
         return (
           <AddAdrress
@@ -247,7 +279,7 @@ export default function AddPropertise() {
             onClick={handleNext}
             disabled={activeStep === 12 ? false : isNextButtonDisabled}
           >
-            {activeStep != 12 && isNextButtonDisabled ? (
+            {activeStep !== 12 && isNextButtonDisabled ? (
               <BeatLoader color="#ff0000" />
             ) : activeStep === 12 ? (
               "Finish"

@@ -3,9 +3,12 @@ import MobileStepper from "@mui/material/MobileStepper";
 import { Button } from "@mui/material";
 import StartPropertise from "../../components/editPropertiseComponents/StartPropertise";
 import PlaceDescibe from "../../components/editPropertiseComponents/PlaceDescibe";
+// import PlaceDescribesId from "../../components/editPropertiseComponents/PlaceDescibe";
 import AddAdrress from "../../components/editPropertiseComponents/AddAddress";
 import TypeOfPlace from "../../components/editPropertiseComponents/TypeOfPlace";
+// import TypeOfPlaceId from "../../components/editPropertiseComponents/TypeOfPlace";
 import LocatedPlace from "../../components/editPropertiseComponents/LocatedPlace";
+// import Located from "../../components/editPropertiseComponents/LocatedPlace";
 import Guests from "../../components/editPropertiseComponents/Guests";
 import Offer from "../../components/editPropertiseComponents/Offer";
 import Description from "../../components/editPropertiseComponents/Description";
@@ -27,8 +30,11 @@ const EditProperty = () => {
   const [stepValues, setStepValues] = useState({
     start: "start",
     placeDescribes: null,
+    // placeDescribesId: null,
+    // typeOfPlaceId: null,
     typeOfPlace: null,
     locatedPlace: null,
+    // located: null,
     addAddress: null,
     guests: null,
     offer: null,
@@ -69,9 +75,12 @@ const EditProperty = () => {
 
     const data = {
       userId: userId,
-      placeDescribesId: stepValues.placeDescibe,
+      placeDescribesId: stepValues.placeDescribes,
+      // placeDescribesId: stepValues.placeDescribesId,
+      // typeOfPlaceId: stepValues.typeOfPlaceId,
       typeOfPlaceId: stepValues.typeOfPlace,
       located: stepValues.locatedPlace,
+      // located: stepValues.located,
       address: stepValues.addAddress,
       guests: stepValues.guests,
       amenitiesIds: stepValues.offer,
@@ -129,6 +138,20 @@ const EditProperty = () => {
             values={parsedSavedStepValues}
           />
         );
+      // case 1:
+      //   return (
+      //     <PlaceDescribesId
+      //       setStepValue={handleStepChange}
+      //       values={parsedSavedStepValues}
+      //     />
+      //   );
+      // case 2:
+      //   return (
+      //     <TypeOfPlaceId
+      //       setStepValue={handleStepChange}
+      //       values={parsedSavedStepValues}
+      //     />
+      //   );
       case 2:
         return (
           <TypeOfPlace
@@ -143,6 +166,13 @@ const EditProperty = () => {
             values={parsedSavedStepValues}
           />
         );
+      // case 3:
+      //   return (
+      //     <Located
+      //       setStepValue={handleStepChange}
+      //       values={parsedSavedStepValues}
+      //     />
+      //   );
       case 4:
         return (
           <AddAdrress
@@ -250,7 +280,7 @@ const EditProperty = () => {
             onClick={handleNext}
             disabled={activeStep === 12 ? false : isNextButtonDisabled}
           >
-            {activeStep != 12 && isNextButtonDisabled ? (
+            {activeStep !== 12 && isNextButtonDisabled ? (
               <BeatLoader color="#ff0000" />
             ) : activeStep === 12 ? (
               "Finish"

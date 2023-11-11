@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../../../components/dataTable/DataTable";
 import AdminLayout from "../../../layouts/adminLayout";
-import { Box, Button, Chip, Grid, IconButton } from "@mui/material";
+import { Box, Chip, Grid, IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Icon } from "@iconify/react";
 import CustomHashLoader from "../../../components/customLoader/CustomHashLoader";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Capitalize from "../../../components/capitalize/Capitalize";
 import { getAllProperties } from "../../../redux/features/AllPropertyForAdminSlice";
 import { MoreHoriz } from "@mui/icons-material";
@@ -17,18 +16,18 @@ import { toast } from "react-toastify";
 const Properties = () => {
   const dispatch = useDispatch();
   const { properties } = useSelector((state) => state?.allPropertyForAdmin);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // if (properties.length > 0) {
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //   }, 1000);
+    // }
     setLoading(true);
-    if (properties.length > 0) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
     dispatch(getAllProperties())
       .then(() => {
         setLoading(false);
@@ -44,9 +43,9 @@ const Properties = () => {
       itemId: property._id,
       id: index + 1,
       image: property.images[0]?.url || "",
-      placeDescribes: property.placeDescribesId?.title || "", 
+      placeDescribes: property.placeDescribesId?.title || "",
       status: property.status || "",
-      price: property.price + '$' || "",
+      price: property.price + "$" || "",
       located:
         (property.located?.address?.state || "") +
         ", " +
@@ -55,8 +54,10 @@ const Properties = () => {
     setData(newData);
   }, [properties]);
 
-  const handleMenuOpen = (event) => {
+  const [itemId, setItemId] = useState();
+  const handleMenuOpen = (event, itemId) => {
     setAnchorEl(event.currentTarget);
+    setItemId(itemId);
   };
 
   const handleMenuClose = () => {
@@ -65,15 +66,22 @@ const Properties = () => {
 
   const updatedStatus = async (propertyId, data) => {
     try {
-      await putApi(`/properties/${propertyId}`, data);
-      toast.success("Successfully status updated");
+      setLoading(true);
+      await putApi(`/properties/${propertyId}`, data).then((res) => {
+        if (res.status === 200) {
+          dispatch(getAllProperties()).then(() => {
+            setLoading(false);
+            toast.success("Successfully status updated");
+          });
+        }
+      });
     } catch (error) {
       console.error("Error submitting data:", error);
       toast.error(error.data.message);
     }
   };
 
-  const handleAction = async (actionType, id) => {
+  const handleAction = (id, actionType) => {
     switch (actionType) {
       case "de-active":
         Swal.fire({
@@ -226,15 +234,16 @@ const Properties = () => {
       sortable: false,
       renderCell: (params) => (
         <Box display="flex">
-          <IconButton onClick={(event) => handleMenuOpen(event)}>
+          <IconButton
+            onClick={(event) => handleMenuOpen(event, params.row.itemId)}
+          >
             <MoreHoriz />
           </IconButton>
           <DropdownMenu
             anchorEl={anchorEl}
             handleMenuClose={handleMenuClose}
-            handleAction={handleAction}
+            handleAction={(actionType) => handleAction(itemId, actionType)}
             actionItems={actionItems}
-            id={params.row.itemId}
           />
         </Box>
       ),

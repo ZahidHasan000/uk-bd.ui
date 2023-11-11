@@ -3,9 +3,12 @@ import MobileStepper from "@mui/material/MobileStepper";
 import { Button } from "@mui/material";
 import StartProperties from "../../components/addpropertiesComponents/StartProperties";
 import PlaceDescibe from "../../components/addpropertiesComponents/PlaceDescibe";
+// import PlaceDescribesId from "../../components/addpropertiesComponents/PlaceDescibe";
 import AddAdrress from "../../components/addpropertiesComponents/AddAddress";
+// import TypeOfPlaceId from "../../components/addpropertiesComponents/TypeOfPlace";
 import TypeOfPlace from "../../components/addpropertiesComponents/TypeOfPlace";
 import LocatedPlace from "../../components/addpropertiesComponents/LocatedPlace";
+// import Located from "../../components/addpropertiesComponents/LocatedPlace";
 import Guests from "../../components/addpropertiesComponents/Guests";
 import Offer from "../../components/addpropertiesComponents/Offer";
 import Description from "../../components/addpropertiesComponents/Description";
@@ -36,8 +39,11 @@ export default function EditProperty() {
       setStepValues({
         start: "start",
         placeDescibe: oldStepValues.placeDescribesId || null,
+        // placeDescribesId: oldStepValues.placeDescribesId || null,
+        // typeOfPlaceId: oldStepValues.typeOfPlaceId || null,
         typeOfPlace: oldStepValues.typeOfPlaceId || null,
         locatedPlace: oldStepValues.located || null,
+        // located: oldStepValues.located || null,
         addAddress: oldStepValues.address || null,
         guests: oldStepValues.guests || null,
         offer: oldStepValues.amenitiesIds || null,
@@ -78,8 +84,11 @@ export default function EditProperty() {
   const dataSubmitServer = async () => {
     const data = {
       placeDescribesId: stepValues.placeDescibe,
+      // placeDescribesId: stepValues.placeDescribesId,
+      // typeOfPlaceId: stepValues.typeOfPlaceId,
       typeOfPlaceId: stepValues.typeOfPlace,
       located: stepValues.locatedPlace,
+      // located: stepValues.located,
       address: stepValues.addAddress,
       guests: stepValues.guests,
       amenitiesIds: stepValues.offer,
@@ -147,6 +156,20 @@ export default function EditProperty() {
             values={parsedSavedStepValues}
           />
         );
+      // case 1:
+      //   return (
+      //     <PlaceDescribesId
+      //       setStepValue={handleStepChange}
+      //       values={parsedSavedStepValues}
+      //     />
+      //   );
+      // case 2:
+      //   return (
+      //     <TypeOfPlaceId
+      //       setStepValue={handleStepChange}
+      //       values={parsedSavedStepValues}
+      //     />
+      //   );
       case 2:
         return (
           <TypeOfPlace
@@ -161,6 +184,13 @@ export default function EditProperty() {
             values={parsedSavedStepValues}
           />
         );
+      // case 3:
+      //   return (
+      //     <Located
+      //       setStepValue={handleStepChange}
+      //       values={parsedSavedStepValues}
+      //     />
+      //   );
       case 4:
         return (
           <AddAdrress
