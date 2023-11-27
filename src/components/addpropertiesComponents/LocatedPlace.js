@@ -7,23 +7,23 @@ const LocatedPlace = ({ setStepValue, values }) => {
   // const Located = ({ setStepValue, values }) => {
   const [selectPosition, setSelectPosition] = useState(null);
 
-  // useEffect(() => {
-  //   if (values.locatedPlace !== null) {
-  //     const localLocation = {
-  //       lat: values.locatedPlace.lat,
-  //       lon: values.locatedPlace.lon,
-  //     };
-  //     setSelectPosition(localLocation);
-  //   }
-
   useEffect(() => {
-    if (values.located !== null && values.located !== undefined) {
+    if (values.locatedPlace !== null) {
       const localLocation = {
-        lat: values.located.lat,
-        lon: values.located.lon,
+        lat: values.locatedPlace.lat,
+        lon: values.locatedPlace.lon,
       };
       setSelectPosition(localLocation);
     }
+
+  // useEffect(() => {
+  //   if (values.located !== null && values.located !== undefined) {
+  //     const localLocation = {
+  //       lat: values.located.lat,
+  //       lon: values.located.lon,
+  //     };
+  //     setSelectPosition(localLocation);
+  //   }
   }, []);
   const handleListItemClick = (data) => {
     const location = {

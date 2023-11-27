@@ -15,6 +15,7 @@ const Prices = ({ setStepValue, values }) => {
 
   useEffect(() => {
     setStepValue("prices", price);
+    fetchSuggestedPrice();
   }, [price]);
 
 
@@ -32,8 +33,8 @@ const Prices = ({ setStepValue, values }) => {
     console.log(price);
     // Make an HTTP request to your Flask API
     axios
-      .post("http://localhost:5001/price", {
-        price: values, // Send the user-entered price to the API
+      .post("http://127.0.0.1:7050/price", {
+        values, // Send the user-entered price to the API
         // Include other necessary data in the request body
       })
       .then((response) => {
@@ -119,9 +120,9 @@ const Prices = ({ setStepValue, values }) => {
             </Grid>
 
             <Grid item xs={12}>
-              <button onClick={fetchSuggestedPrice}>
+              {/* <button onClick={fetchSuggestedPrice}>
                 Get Suggested Price
-              </button>
+              </button> */}
               {suggestedPrice !== null && (
                 <Typography variant="text" mt={2}>
                   Suggested Price: ${suggestedPrice}

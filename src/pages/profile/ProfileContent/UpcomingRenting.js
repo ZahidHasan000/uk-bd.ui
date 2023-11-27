@@ -7,6 +7,10 @@ import ListItemText from "@mui/material/ListItemText";
 import StarIcon from "@mui/icons-material/Star";
 import { Divider, Grid, TextField } from "@mui/material";
 import CustomDialog from "../../../components/customDialog/CustomDialog";
+<<<<<<< HEAD
+=======
+import { useAuthInfo } from "../../../helpers/AuthCheck";
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
 
 export default function UpcomingRenting() {
   const [openEmail, setOpenEmail] = React.useState(false);
@@ -14,6 +18,11 @@ export default function UpcomingRenting() {
   const [openAddress, setOpenAddress] = React.useState(false);
   const [selectedDialog, setSelectedDialog] = React.useState("");
 
+<<<<<<< HEAD
+=======
+  const userInfo = useAuthInfo();
+
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
   const handleDialogOpen = (dialogType) => {
     setSelectedDialog(dialogType);
     if (dialogType === "email") {
@@ -61,7 +70,11 @@ export default function UpcomingRenting() {
                 <TextField
                   id="standard-basic"
                   label="Email"
+<<<<<<< HEAD
                   value={"jahid@gmail.com"}
+=======
+                  value={userInfo.email}
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
                   variant="standard"
                 />
               }
@@ -105,15 +118,24 @@ export default function UpcomingRenting() {
               </ListItemButton>
             </ListItem>
 
+<<<<<<< HEAD
             <CustomDialog 
+=======
+            <CustomDialog
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
               handleClose={handleDialogClose}
               open={openAddress}
               title={"Address"}
               input={
                 <TextField
                   id="standard-basic"
+<<<<<<< HEAD
                   label="Address"
                   value={"dhanmondi, dhaka"}
+=======
+                  label="Name"
+                  value={userInfo.name}
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
                   variant="standard"
                 />
               }

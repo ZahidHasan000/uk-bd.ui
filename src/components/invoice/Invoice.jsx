@@ -2,7 +2,11 @@ import React from "react";
 import { Grid, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
+<<<<<<< HEAD
 // import { saveAs } from "file-saver";
+=======
+import { saveAs } from "file-saver";
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
 import "./Invoice.css";
 import { BeatLoader } from "react-spinners";
 
@@ -15,8 +19,13 @@ const Invoice = ({ Datastate }) => {
       .post("/create-pdf", Datastate)
       .then(() => axios.get("/fetch-pdf", { responseType: "blob" }))
       .then((res) => {
+<<<<<<< HEAD
         // const pdfBlob = new Blob([res.data], { type: "application/pdf" });
         // saveAs(pdfBlob, "newPdf.pdf");
+=======
+        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+        saveAs(pdfBlob, "newPdf.pdf");
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
         setLoading(false);
       })
       .catch((error) => {

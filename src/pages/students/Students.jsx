@@ -23,6 +23,7 @@ const Students = () => {
   const [age, setAge] = useState("");
   const [city, setCity] = useState("");
 
+<<<<<<< HEAD
   let studentInfoForSumbut = {
     name: name,
     age: age,
@@ -44,11 +45,50 @@ const Students = () => {
       })
       .catch((err) => console.log(err.message));
   };
+=======
+  const [images, setImages] = useState([]);
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
 
   useEffect(() => {
     fetchStudents();
   }, []);
 
+<<<<<<< HEAD
+=======
+  const handleImageChange = (e) => {
+    const fileList = e.target.files;
+    setImages([...images, ...fileList]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    images.forEach((image, index) => {
+      formData.append(`images`, image);
+    });
+
+    formData.append("name", name);
+    formData.append("age", age);
+    formData.append("city", city);
+
+    try {
+      await axios
+        .post("http://localhost:5050/api/add", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => setMessage(res.message));
+      fetchStudents();
+      console.log("Data uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading data:", error);
+    }
+  };
+
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
   const fetchStudents = () => {
     // fetch data use api endpoint 'api/students' use axios
     axios
@@ -61,10 +101,18 @@ const Students = () => {
 
   // handle delete
   const handleDelete = (id) => {
+<<<<<<< HEAD
     axios.delete(`${process.env.REACT_APP_BASE_URL}/delete/${id}`,)
       .then((response) => {
         setMessage(response.data.message);
         fetchStudents(); 
+=======
+    axios
+      .delete(`${process.env.REACT_APP_BASE_URL}/delete/${id}`)
+      .then((response) => {
+        setMessage(response.data.message);
+        fetchStudents();
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
       })
       .catch((err) => console.log(err));
   };
@@ -72,9 +120,14 @@ const Students = () => {
   // handle edit
   const handleEdit = (id) => {
     navigate(`/edit/${id}`);
+<<<<<<< HEAD
     
   }
   
+=======
+  };
+
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
   return (
     <AppLayout>
       <Container maxWidth={"xl"}>
@@ -104,6 +157,19 @@ const Students = () => {
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
               />
+<<<<<<< HEAD
+=======
+              <input type="file" multiple onChange={handleImageChange} />
+              {images.map((image, index) => (
+                <img
+                  style={{ width: "100px" }}
+                  src={URL.createObjectURL(image)}
+                  alt="Preview"
+                  key={index}
+                />
+              ))}
+
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
               <TextField
                 id="outlined-basic"
                 fullWidth
@@ -135,16 +201,34 @@ const Students = () => {
                   <th style={{ padding: "10px" }}>Name</th>
                   <th style={{ padding: "10px" }}>Age</th>
                   <th style={{ padding: "10px" }}>City</th>
+<<<<<<< HEAD
+=======
+                  <th style={{ padding: "10px" }}>image</th>
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
                   <th style={{ padding: "10px" }}>Action</th>
                 </tr>
               </thead>
               <tbody>
+<<<<<<< HEAD
                 {students.map((student, index ) => (
+=======
+                {students.map((student, index) => (
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
                   <tr key={index}>
                     <td style={{ padding: "10px" }}>{student.name}</td>
                     <td style={{ padding: "10px" }}>{student.age}</td>
                     <td style={{ padding: "10px" }}>{student.city}</td>
                     <td style={{ padding: "10px" }}>
+<<<<<<< HEAD
+=======
+                      <img
+                        style={{ width: "100px" }}
+                        src={`${process.env.REACT_APP_BASE_URL}/${student.images[0]}`}
+                        alt="Preview"
+                      />
+                    </td>
+                    <td style={{ padding: "10px" }}>
+>>>>>>> e695b829de964c4dcfa7d0ea97a2f5d5e7b084bf
                       <Button
                         onClick={() => handleEdit(student._id)}
                         variant="contained"
